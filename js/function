@@ -1,0 +1,99 @@
+函数声明:函数名提升，同变量
+function f(x){
+    console.log(x);
+}
+
+函数表达式
+var print=function(){};
+
+构造函数
+var add=new function(){
+    'x',
+    'y',
+    'x+y'
+};
+等同于
+function add(x,y){
+    return x+y;
+};
+
+递归，函数调用自身，斐波那契数列
+function fib(num){
+    if(num===0) return 0;
+    if(num===1) return 1;
+    return fib(num-1)+fib(num-2);
+}
+
+函数属性
+function add(x,y){}
+add.name;函数名
+add.length;参数个数，不包含调用时
+add.toString();函数源码，包括注释'/function add(x,y){}/'
+
+作用域
+函数外部，全局变量，函数内部，局部变量，会覆盖全局变量
+内部也会有变量提升
+函数执行时的作用域是定义时的作用域，不是调用：函数体内部声明的函数，作用域绑定在函数体内部——闭包
+
+参数
+只保留靠后参数时，显性传入undefined
+
+传递方式
+number,boolean,string ——passes by value
+object,arry,functiong——passes by reference
+var obj={p:1};
+function add(o){
+    o.p=2;
+}
+add(obj);
+obj.p;//1
+
+//替换整个参数时，不会影响原始值
+var obj = [1, 2, 3];
+function f(o) {
+  o = [2, 3, 4];
+}
+f(obj);
+obj // [1, 2, 3]
+
+同名参数，取最后出现的值
+function f(a,a){
+    console.log(a);
+}
+f(1,2);//2
+f(1);/undefined
+想要取第一个：
+function f(a,a){
+    console.log(arguments[0]);
+}
+f(1);//1
+
+arguments对象！！
+arguments[n],函数调用时的第N个参数
+正常模式下修改无效
+var f = function(a, b) {
+  'use strict'; // 开启严格模式
+  arguments[0] = 3; // 无效
+  arguments[1] = 2; // 无效
+  return a + b;
+}
+f(1, 1) // 2
+arguments.length 参数个数
+
+arguments与arry的转化  
+方法一：slice
+var args=Array.prototype.slice.call(arguments);
+能将具有length属性的对象转成数组
+https://blog.csdn.net/bowen11233/article/details/53286826
+
+方法二:逐一填入新数组
+var args=[];
+for(var i=0;i<arguments.length;i++)
+{args.push(arguments[i]);
+}
+
+callee属性：返回对应的原函数
+var f=function(){
+    console.log(arguments.callee===f);
+}
+f();//true;
