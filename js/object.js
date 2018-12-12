@@ -80,3 +80,6 @@ with(document.links[0]){
     console.log(document.links[0].herf);
     console.log(document.links[0].name);
 }
+a
+b
+c
