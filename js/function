@@ -97,3 +97,35 @@ var f=function(){
     console.log(arguments.callee===f);
 }
 f();//true;
+
+闭包：定义在一个函数内部的函数
+一、读取函数内部的变量
+function f1(){
+    var n=999;
+    function f2(){
+        console.log(n);
+    }
+    return f2;
+}
+①var result=f1();
+result();//999;
+②f1();//function f2(){}???
+
+二、变量保存在内存中
+function add(start){
+    return function(){
+        return start++;
+    };
+}
+var inc=add(5);
+inc();//5
+inc();//6
+
+function add(x){
+    var y=10+x;
+    function tim(){
+        y=y+10;
+        
+    }
+return y;
+}
