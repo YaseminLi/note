@@ -1,0 +1,47 @@
+var arr=[
+    {a:1},
+    '2'
+    function (){return true;}
+];
+//任何数据类型都可以放入数组，对象、字符串、函数
+
+多维数组
+var arr=[[1,2],[3,4]];
+arr[0][1];//2
+
+特殊的对象，
+typeof [1,2,3];//object
+返回数组的所有键名
+var arr=[1,2,3]
+Object.keys(arr);// ["0", "1", "2"]
+
+位置即键名，数值会自动转化成字符串
+
+length属性可写,小于Math.Pow(2,32)
+var arr=['1','2','3'];
+arr.length;//3
+arr.length=2;
+arr;
+
+清空数组
+arr=[]
+arr.length=0;
+length属性大于数组个数时，空位为undefined
+
+var arr=[];
+arr[-1]='a';
+arr[Math.pow(2,32)]='b';
+arr.length;//0
+arr[-1];//a
+arr[4294967296];//b
+arr；//[-1: "a", 4294967296: "b"]
+
+in 运算符 检查某个键名是否存在于数组、对象,位置为空位时，返回false
+var arr=[1,2,3];
+2  in arr;//true
+4  in arr;//false
+ 
+ 遍历数组
+ ①for...in...
+ var arr=[1,2,3];
+ 
