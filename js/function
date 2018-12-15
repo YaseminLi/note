@@ -121,11 +121,34 @@ var inc=add(5);
 inc();//5
 inc();//6
 
-function add(x){
-    var y=10+x;
-    function tim(){
-        y=y+10;
-        
+三、封装对象的私有属性和私有方法
+function Person(name){
+    var age;
+    function SetAge(n){
+        age=n;
     }
-return y;
+    function GetAge(){
+        return age;
+    }
+    return {
+        name:name,
+        SetAge:SetAge,
+        GetAge:GetAge
+    };
 }
+var p1=Person("张三")
+p1.SetAge(25);
+p1.GetAge();
+
+eval接受一个字符串作为参数，并且执行该字符串
+eval('var a=1;');
+eval(13);//13;非字符串，会原样返回
+
+别名执行EVAL,作用域为全局变量
+var a=1;
+function f(){
+    var a=2;
+    var m=eval;
+    m('console.log(a);');
+}
+f();//1;
