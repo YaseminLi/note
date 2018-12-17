@@ -1,0 +1,76 @@
+*算术运算符
+*比较运算符
+*布尔运算符
+*二进制位运算符
+*其他
+
+指数运算符：x ** y
+
+加法中：
+重载overload:运算子不同，结果不同
+'3' + 4 + 5 // "345"
+3 + 4 + '5' // "75"
+
+var object={p:1};
+object+2;
+"[object Object]2"
+
+var obj={
+    valueOf:function(){
+        return 1;
+    }
+};
+obj+2;//3
+
+var obj={
+    toString:function(){
+        return 'hello';
+    }
+};
+obj+2;//"hello2"
+
+var obj=new Date();
+obj.valueOf=function(){return 1};
+obj.toString=function(){return "hello"};
+obj+2;//hello2,Date对象时，优先执行toString
+
+-10%-3
+-1
+
+function a(n){
+    return Math.abs(n)%2===1;
+}
+a(-5);//true
+
+var x=1;y=2;
+x++;  1
+x;2
+++y;  2
+y;    2
+
++[];  0
++{};  NaN
+
+var a1;
+var a2;
+a1===a2;  true,未赋值的变量都为undefined
+
+!undefined // true
+!null // true
+!0 // true
+!NaN // true
+!"" // true
+
+var x=1;
+(1-1)&&(x+=1);  0
+x; 1
+
+function saveText(text){
+    text=text||'';
+    //...上面代码表示，如果函数调用时，没有提供参数，则该参数默认设置为空字符串。
+}
+
+'f'?'hello':'yes';//'hello'
+0?'hello':'yes';//'yes'
+三元条件表达式与if...else语句具有同样表达效果if...else是语句，没有返回值；三元条件表达式是表达式，具有返回值。
+console.log(true ? 'T' : 'F');
