@@ -44,4 +44,74 @@ var arr=[1,2,3];
  遍历数组
  ①for...in...
  var arr=[1,2,3];
- 
+ for(var i in arr){
+     console.log(arr[i]);
+ }
+
+ ②for循环
+ var arr=[1,2,3];
+ for(var i=0;i<arr.length;i++){
+     console.log(arr[i]);
+ }
+ 三、while循环
+var arr=[1,2,3];
+var i=0;
+ while(i<arr.length){
+     console.log(arr[i]);
+     i++;
+ }
+
+ 逆向
+ var arr=[1,2,3];
+ var l=arr.length;
+ while(l>=0){
+     console.log(arr[l]);
+     l--;
+ }
+ ④forEach方法
+ var arr=[1,2,3];
+ arr.forEach(function(arr){
+     console.log(arr);
+ });
+
+ delete arr[1];//删除某一项
+
+ forEach\for in\object.keys,遍历时，空位会被跳过；undefined时不会被跳过
+
+ 类似数组的对象：
+ 如果一个对象的所有键名都是正整数或零，并且有length属性，那么这个对象就很像数组，语法上称为“类似数组的对象”（array-like object）。
+var obj={
+    1:q,
+    2:w,
+    3:e,
+    length:3
+};
+obj.push("d");//报错，没有push属性
+length属性不是动态的，不会随着成员的变化而变化
+
+arguments,DOM元素，字符串
+// arguments对象
+function args() { return arguments }
+var arrayLike = args('a', 'b');
+
+arrayLike[0] // 'a'
+arrayLike.length // 2
+arrayLike instanceof Array // false
+
+// DOM元素集
+var elts = document.getElementsByTagName('h3');
+elts.length // 3
+elts instanceof Array // false
+
+// 字符串
+'abc'[1] // 'b'
+'abc'.length // 3
+'abc' instanceof Array // false
+
+类似数组的对象转化为真的数组：
+①var arr=Array.prototype.slice.call(arrayLike);
+②使用call方法
+function print(value,index){
+    console.log(index+':'+value);
+};
+Array.prototype.forEach.call(arrayLike,print);
