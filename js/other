@@ -35,3 +35,38 @@ try{
 finally{
     closefile();
 }
+
+按 F12 或者Control + Shift + i（PC）/ Alt + Command + i（Mac）
+console.log('%s+%s=%s',1,2,3)
+console.log方法的第一个参数有三个占位符（%s），第二、三、四个参数会在显示时，依次替换掉这个三个占位符
+%s 字符串
+%d 整数
+%i 整数
+%f 浮点数
+%o 对象的链接
+%c CSS 格式字符串
+var number=11*9;
+var color='red';
+console.log('%d %s ballons',number,color);//99 red ballons
+console.log('%cThis is a dog','color:red;background:yellow;')
+
+console.info()
+console.debug()
+console.table()将内容显示成表格
+var language={
+    one:{name:'english',country:'american'},
+    two:{name:'chinese',country:'china'}
+};
+console.table(language);
+
+console.count()
+执行次数计数
+console.count(user)  user:接受一个字符串作为参数，作为标签，对执行次数进行分类
+
+function greet(user){
+    console.count(user);
+    return 'hi'+user;
+}
+greet('bob');// bob:1  'hibob'
+greet('bob');// bob:2  'hibob'
+greet('amy');// amy:1  'hiamy'
