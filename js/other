@@ -1,0 +1,37 @@
+Number({a: 1}) // NaN
+Number([1, 2, 3]) // NaN
+Number([5]) // 5
+
+String({a:1})//
+String([1,2,3])//
+
+var err=new Error(''出错了);
+err.message;//
+
+自定义错误对象
+function UserError(message){
+    this.message=message||'默认信息'；
+    this.name='UserError';
+}
+UserError.prototype=new Error();
+UserError.prototype.constructor=UserError;
+
+new UserError('这是自定义的错误！');
+
+throw语句
+function UserError(message){    
+    this.message=message||"默认信息";
+    this.name='UserError';
+}
+throw new UserError('出错了！');
+
+finally 代码块的典型用法
+openfile();
+try{
+    writefile(Data);
+}catch(e){
+    handleerro(e);
+}
+finally{
+    closefile();
+}
