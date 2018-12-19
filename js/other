@@ -70,3 +70,12 @@ function greet(user){
 greet('bob');// bob:1  'hibob'
 greet('bob');// bob:2  'hibob'
 greet('amy');// amy:1  'hiamy'
+
+console.log({f1: 'foo', f2: 'bar'})
+// Object {f1: "foo", f2: "bar"}
+
+console.dir({f1: 'foo', f2: 'bar'})
+// Object
+//   f1: "foo"
+//   f2: "bar"
+//   __proto__: Object
