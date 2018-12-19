@@ -6,6 +6,8 @@ var obj = {
     name: "xiaoming"
 }
 
+对象有两种读取成员的方法：点结构（object.key）和方括号结构（object[key]）
+
 //属性值为函数
 var a = {
     b: function (x) {
@@ -80,6 +82,15 @@ with(document.links[0]){
     console.log(document.links[0].herf);
     console.log(document.links[0].name);
 }
-a
-b
-c
+
+
+Object对象本身的方法
+Object.print=function(o){console.log(o)};
+Object实例的方法，即Object.prototype,可以被所有实例对象共享
+Object.prototype.print=function(){
+    console.log(this);
+};
+var obj=new Object();
+obj.print();
+
+obj instanceof Object//true用来验证，一个对象是否为指定的构造函数的实例
