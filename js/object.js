@@ -94,3 +94,78 @@ var obj=new Object();
 obj.print();
 
 obj instanceof Object//true用来验证，一个对象是否为指定的构造函数的实例
+
+Object();转化为对象
+判断一个变量是否为对象：
+function isObj(value){
+    return value===Object(value);
+};
+isObj([]);//true
+isObj(true);//false
+
+Object构造函数
+var o1={p:1};
+var o2=new Object(o1);
+o1===o2;//true
+
+var obj={p:1,
+        a:2};
+Object.keys(obj);/["p", "a"]
+Object.getOwnPropertyNames(obj);//[ 'p', 'a' ]
+
+var add=['red','yellow'];
+Object.keys(add);//[ '0', '1' ]
+Object.getOwnPropertyNames(add);//[ '0', '1', 'length' ],可返回不可枚举属性名
+
+(function () {
+    return 123;
+  }).toString()
+  // "function () {
+  //   return 123;
+  // }"
+
+  Object.prototype.toString方法返回对象的类型字符串，因此可以用来判断一个值的类型。
+  Object.prototype.toString.call(2) // "[object Number]"
+Object.prototype.toString.call('') // "[object String]"
+Object.prototype.toString.call(true) // "[object Boolean]"
+Object.prototype.toString.call(undefined) // "[object Undefined]"
+Object.prototype.toString.call(null) // "[object Null]"
+Object.prototype.toString.call(Math) // "[object Math]"
+Object.prototype.toString.call({}) // "[object Object]"
+Object.prototype.toString.call([]) // "[object Array]"
+
+目前，主要有三个对象自定义了toLocaleString方法。
+Array.prototype.toLocaleString()
+Number.prototype.toLocaleString()
+Date.prototype.toLocaleString()
+
+举例来说，日期的实例对象的toString和toLocaleString返回值就不一样，而且toLocaleString的返回值跟用户设定的所在地域相关。
+
+var date = new Date();
+date.toString() // "Tue Jan 01 2018 12:01:33 GMT+0800 (CST)"
+date.toLocaleString() // "1/01/2018, 12:01:33 PM"
+
+var obj={p:1,
+    a:2};
+obj.hasOwnProperty('p');//true
+obj.hasOwnProperty('ye');//false
+
+var obj={p:1,
+    a:2};
+Object.getOwnPropertyDescriptor(obj,'p');//
+{ value: 1, writable: true, enumerable: true, configurable: true }
+
+var obj=Object.defineProperty({},'p',{
+    value:123,
+    configurable:false,
+    enumerable:true,
+    writable:false
+});
+obj.p;//123
+
+var obj=Object.defineProperties({},{
+    p1:{value:123,enumerable:true},
+    p2:{value:234,enumerable:true}
+});
+obj.p1;//123
+obj.p2;//234
