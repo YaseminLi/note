@@ -1,0 +1,31 @@
+$mkdir //创建
+$cd  //进入
+$cd . //进入当前目录
+$cd ..//进入上一级
+$pwd //显示当前目录
+$ls -ah //显示当前目录下的明细
+$git init//变成git可以管理的目录
+$git add .  //提交所在文件夹
+$git status //查看是否修改
+$git diff ///查看做了什么修改
+$git log //查看修改记录
+$cat readme.txt//查看修改内容
+$git reflog//查看提交历史
+
+//撤销修改
+$git checkout --file//工作区时
+$git reset HEAD <file>//暂存区时，已经add了，先撤销提交，重新放回工作区
+$git reset --hard HEAD//commit后，先版本退回
+
+//删除
+$rm file//工作区删除
+$git rm file //版本库中删除
+
+//提交
+git add <file>
+git commit -m""
+git remote add origin git@github.com:yaseminli/file.git //同一文件夹下origin不能重复
+git push origin master
+
+node -v node 版本号
+npm -v  npm 版本号
