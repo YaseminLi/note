@@ -1,0 +1,32 @@
+环境
+CommonJS node.js模块管理规范，在全局中
+每个文件是一个模块，且只能有一个模块，有局部变量作用域（被函数包裹）；
+module变量：模块本身；
+module.exports:模块对外接口  与自带的exports的区别？
+1、exports是module.exports的快捷方式，可以理解为exports指向module.exports对象，可以在exports对象中添加属性，但是不能更改exports的指向，比如给exports赋值一个对象，这时再require这个模块时，就拿不到这个对象。
+2、在commonJS中，模块的对外输出永远是module.exports，如果更改了exports的指向，它就只是一个普通对象
+
+
+require加载其他模块,所有语句都会被执行
+只会加载一次，加载后会缓存
+循环加载时，只输出已经执行的部分
+
+build-in内置模块
+
+global变量下
+commomJS
+buffer process 
+timer
+
+4-2
+__dirname __filename 返回文件的绝对路径
+process.cwd()返回执行node命令所在文件夹
+./ :require中，当前文件所在文件夹
+    其他地方：node命令时启动的文件夹，同process.pwd()
+
+4-3
+buffer
+挂在global下
+处理二进制数据流
+类似整数数组，大小固定？
+在V8堆外分配物理内存
