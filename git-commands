@@ -25,7 +25,9 @@ $git rm file //版本库中删除
 git add <file>
 git commit -m""
 git remote add origin git@github.com:yaseminli/file.git //同一文件夹下origin不能重复
-git push origin master
+git push origin masters
 
 node -v node 版本号
 npm -v  npm 版本号
+
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
