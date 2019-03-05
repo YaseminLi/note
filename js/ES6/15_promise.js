@@ -17,23 +17,23 @@
 //     //failure
 // });
 
-function timeout(ms){
-    return new Promise((resolve,reject)=>{
-        setTimeout(resolve,ms,'done');
+function timeout(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms, 'done');
     });
 };
-timeout(0).then((value)=>{
+timeout(0).then((value) => {
     console.log(value);
 });
 
 //promimse新建后会立即执行
-let promise1=new Promise((resolve,reject)=>{
+let promise1 = new Promise((resolve, reject) => {
     console.log('promise');
     resolve();
 });
-promise1.then(function() {
+promise1.then(function () {
     console.log('resolved');
-  });
+});
 console.log('Hi');
 // promise创建后立即执行
 // Hi
