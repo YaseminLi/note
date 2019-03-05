@@ -24,10 +24,11 @@ console.log(target.a);//b
 var obj={proxy:new Proxy(target,handler)};
 
 //Proxy 实例也可以作为其他对象的原型对象。
+//proxy对象是obj对象的原型，obj对象本身并没有time属性，所以根据原型链，会在proxy对象上读取该属性，导致被拦截
 var proxy3=new Proxy({},{
     get:function (){
         return 'proxy3';
     }
 });
 var obj=Object.create(proxy3);
-console.log(obj.time);
+console.log(obj.time);//proxy3
