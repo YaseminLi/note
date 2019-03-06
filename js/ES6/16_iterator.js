@@ -11,18 +11,18 @@
 
 //遍历器生成函数
 //done:false 和 value:undefined 属性可以省略
-function makeiterator(arr) {
-    var nextIndex = 0;
-    return {
-        next: function(){
-        return nextIndex < arr.length ?
-            { value: arr[nextIndex++], done: false } :
-            { value: undefined, done: true };
-        }
-    }
-}
-var it=makeiterator([1, 2]);
-console.log(it.next());//{value:1,done:false}
+// function makeiterator(arr) {
+//     var nextIndex = 0;
+//     return {
+//         next: function(){
+//         return nextIndex < arr.length ?
+//             { value: arr[nextIndex++], done: false } :
+//             { value: undefined, done: true };
+//         }
+//     }
+// }
+// var it=makeiterator([1, 2]);
+// console.log(it.next());//{value:1,done:false}
 
 //有symbol.iterator属性，就存在接口，可遍历
 
@@ -37,9 +37,35 @@ console.log(it.next());//{value:1,done:false}
 //NodeList 对象??
 
 //数组的symbol.iterator属性
-let arr=[1,2,3];
-let it1=arr[Symbol.iterator]();
+let arr = [1, 2, 3];
+let it1 = arr[Symbol.iterator]();
 console.log(it1.next());//{ value: 1, done: false }
 
+//对象上部署iterator接口，实现for...of 循环
+class rangeIterator {
+    constructor(start, stop) {
+        this.value = start;
+        this.stop = stop;
+    }
+    [Symbol.iterator]() {
+        return this;
+    }
+    next() {
+        var value = this.value;
+        if (value < this.stop) {
+            this.value++;
+            return { value: value, done: false };
+        }
+        return { done: true };
 
+    }
+}
+
+function range(start, stop) {
+    return new rangeIterator(start, stop);
+}
+
+for (let value of range(0, 3)) {
+    console.log(value);
+}
 
