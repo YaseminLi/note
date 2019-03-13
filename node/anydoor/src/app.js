@@ -1,15 +1,30 @@
 const http = require('http');
-
 const chalk = require('chalk');
 const path = require('path');
 const conf = require('./config/defaultConfig');
 const route=require('./helper/route');
+const open=require('./helper/open');
 
-const server = http.createServer((req, res) => {
-    const url = req.url;
-    const filePath = path.join(conf.root, url);
-    route(req,res,filePath);
-});
+class Server{
+    constructor(config){
+        //合并
+        this.conf=Object.assign({},conf,config);
+    }
+    start(){
+        const server = http.createServer((req, res) => {
+            const url = req.url;
+            const filePath = path.join(this.conf.root, url);
+            route(req,res,filePath,this.conf);
+        });
+        server.listen(this.conf.port, this.conf.hostname, () => {
+            const addr = `http://${this.conf.hostname}:${this.conf.port}`;
+            console.log(`Sever started at ${chalk.green(addr)}`);
+        open(addr);
+        });
+    }
+}
+module.exports=Server;
+
 
         //demo2
         // //拿到路径，之后，是文件返回内容，文件夹就返回列表
@@ -46,11 +61,5 @@ const server = http.createServer((req, res) => {
         // res.write('<body>');
         // res.write('hello xiaoming!');
         // res.write('</body>'); 
-        // res.end('<html>');
+        // res.end('<html');
   
-
-server.listen(conf.port, conf.hostname, () => {
-    const addr = `http://${conf.hostname}:${conf.port}`;
-    console.log(`Sever started at ${chalk.green(addr)}`);
-
-});

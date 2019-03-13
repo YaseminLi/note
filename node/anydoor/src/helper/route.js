@@ -4,10 +4,10 @@ const path = require('path');
 const promisify = require('util').promisify;
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
-const config = require('../config/defaultConfig');
 const mime = require('./mime');
 const compress = require('./compress');
 const range = require('./range');
+const isFresh=require('./cache');
 
 //tplPath='../template/dir.tpl',不可以，不同启动目录下..不同
 //处理路径尽量用绝对路径
@@ -23,13 +23,20 @@ const picPath = path.join(__dirname, '../pic');
 // console.log(path.relative(config.root, picPath));
 
 
-module.exports = async function (req, res, filePath) {
+
+module.exports = async function (req, res, filePath,config) {
     try {
         const stats = await stat(filePath);
         if (stats.isFile()) {
             const contentType = mime(filePath).text;
-
             res.setHeader('Content-Type', contentType);
+            if(isFresh(stats,req,res)){
+                console.log('304');
+                
+                res.statusCode=304;
+                res.end();
+                return;
+            }
             let rs;
             const { code, start, end } = range(stats.size, req, res);
             if (code === 200) {
@@ -48,8 +55,11 @@ module.exports = async function (req, res, filePath) {
         } else if (stats.isDirectory()) {
             const files = await readdir(filePath);
             const dir = path.relative(config.root, filePath);
-            const icon = path.relative(config.root, picPath) + mime(filePath).icon;
-            console.log(mime(filePath).icon);
+            //const icon = path.join(path.relative(config.root, picPath) ,mime(filePath).icon);
+            // console.log('icon：'+icon);
+            // //怎么浏览获取每个文件的路径？
+            // console.log('mime:'+mime(filePath).icon);
+            // console.log('rel:'+path.relative(config.root,picPath));
             
             const data = {
                 //path.basename,返回path的最后一部分
@@ -58,9 +68,13 @@ module.exports = async function (req, res, filePath) {
                 //文件的路径
                 dir: dir ? `/${dir}` : '',
                 files: files.map(file => {
+                    // console.log(file);
+                    const iconPath=mime(file).icon;
+                    // console.log(iconPath);
+                    
                     return {
                         file,
-                        icon: icon
+                        icon: iconPath
                     }
                 })
             };
