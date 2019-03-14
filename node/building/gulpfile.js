@@ -3,7 +3,7 @@ const less = require('gulp-less');
 const del = require('del');
 const autoprefxer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
-
+const babelminify=require('gulp-babel-minify');
 function clean(done) {
     del.sync('build');
     done();
@@ -26,6 +26,18 @@ function move(done) {
     done();
 }
 
+function handel(done){
+    gulp.src("src/**/*.js")
+    .pipe(babelminify({
+      mangle: {
+        keepClassName: true
+      }
+    },{
+        sourceType:'module'
+    }))
+    .pipe(gulp.dest("build"));
+    done();
+}
 
 function watch(done){
     const watcher = gulp.watch('src/**/*.js');
@@ -45,7 +57,7 @@ function watch(done){
   
 };
 
-exports.default = gulp.series(clean, handleless, move);
+exports.default = gulp.series(clean, gulp.parallel(handel,handleless));
 exports.move = move;
 exports.watch = watch;
 
