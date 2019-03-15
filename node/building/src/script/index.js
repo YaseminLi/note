@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {fn2} from './util';
+import '../style/index.less';
 
 
 class Demo extends Component{
